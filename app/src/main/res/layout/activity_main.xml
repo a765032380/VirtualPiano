@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/darker_gray">
+
+    <com.adesk.pianokeyboardlib.musicalsensors.Scoresheet
+        android:id="@+id/scoresheet_area"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:layout_column="0"
+        android:layout_columnSpan="2"
+        android:layout_row="4"/>
+
+
+    <SeekBar
+        android:layout_alignParentBottom="true"
+        android:id="@+id/seek_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="220dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:focusable="true"
+        android:maxHeight="4dp"
+        android:minHeight="4dp" />
+
+    <com.adesk.pianokeyboardlib.keyboard.PianoKeyBoard
+        android:layout_alignParentBottom="true"
+        android:id="@+id/keyboard"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="#ccc"
+        app:blackKeyDrawable="@drawable/black_up"
+        app:blackKeyPressedDrawable="@drawable/black_down"
+        app:keyCount="10"
+        app:pronuncTextColor="#000000"
+        app:pronuncTextSize="12sp"
+        app:blackKeyHeightRatio="0.6"
+        app:blackKeyWidthRatioToWhiteKeyWidth="0.9"
+        app:pronuncTextYRatio="0.9"
+        app:whiteKeyDrawable="@drawable/white_up"
+        app:whiteKeyPressedDrawable="@drawable/white_down" />
+
+</RelativeLayout>
