@@ -9,7 +9,7 @@ import com.adesk.mvpframe.base.BaseActivity;
 import com.adesk.mvpframe.base.BasePresenter;
 import com.adesk.pianokeyboardlib.keyboard.Key;
 import com.adesk.pianokeyboardlib.keyboard.PianoKeyBoard;
-import com.adesk.pianokeyboardlib.musicalsensors.Scoresheet;
+import com.adesk.pianokeyboardlib.musicalsensors.ScoreSheet;
 import com.adesk.pianokeyboardlib.sound.SoundPlayUtils;
 import com.adesk.virtualpiano.R;
 import com.adesk.virtualpiano.mvp.contract.PianoMainContract;
@@ -22,7 +22,7 @@ public class PianoMainActivity extends BaseActivity implements PianoMainContract
 
     SeekBar mSeekBar;
     PianoKeyBoard mKeyboard;
-    Scoresheet scoresheet;
+    ScoreSheet scoresheet;
 
     protected void playTrack(String song) {
         scoresheet.addTrack(song);
@@ -34,7 +34,7 @@ public class PianoMainActivity extends BaseActivity implements PianoMainContract
         SoundPlayUtils.init(getApplicationContext());
         mKeyboard = findViewById(R.id.keyboard);
         mSeekBar = findViewById(R.id.seek_bar);
-        scoresheet = (Scoresheet) findViewById(R.id.scoresheet_area);
+        scoresheet = (ScoreSheet) findViewById(R.id.scoresheet_area);
         mKeyboard.setKeyListener(new PianoKeyBoard.KeyListener() {
             @Override
             public void onKeyPressed(Key key) {
@@ -44,6 +44,7 @@ public class PianoMainActivity extends BaseActivity implements PianoMainContract
             @Override
             public void onKeyUp(Key key) {
 //                playTrack("1G#5 2Fb5 3E#5 4Db5 4C#5 6Bb4 8A#4 1Gb4 2F#4 3Eb4 4D#4 6Cb4");
+//                key.getKeyCode();
                 playTrack(key.getTextToDraw());
             }
 
