@@ -15,6 +15,9 @@ import com.adesk.virtualpiano.R;
 import com.adesk.virtualpiano.mvp.contract.PianoMainContract;
 import com.adesk.virtualpiano.mvp.presenter.PianoMainPresenter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @author tony
  */
@@ -24,10 +27,24 @@ public class PianoMainActivity extends BaseActivity implements PianoMainContract
     PianoKeyBoard mKeyboard;
     ScoreSheet scoresheet;
 
+    private String sweep = "1G#5 2Fb5 3E#5 4Db5 4C#5 6Bb4 8A#4 1Gb4 2F#4 3Eb4 4D#4 6Cb4";
+    private String[] sweepList = {"1G#5",
+            "2F4",
+            "3E#5",
+            "4Db5",
+            "4C4",
+            "6Bb4",
+            "8A4",
+            "1Gb4",
+            "2F#4",
+            "3Eb4",
+            "4D#4",
+            "6Cb4"};
     protected void playTrack(String song) {
         scoresheet.addTrack(song);
         scoresheet.invalidate();
     }
+    private int position=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,7 +62,8 @@ public class PianoMainActivity extends BaseActivity implements PianoMainContract
             public void onKeyUp(Key key) {
 //                playTrack("1G#5 2Fb5 3E#5 4Db5 4C#5 6Bb4 8A#4 1Gb4 2F#4 3Eb4 4D#4 6Cb4");
 //                key.getKeyCode();
-                playTrack(key.getTextToDraw());
+                playTrack(sweepList[position]);
+                position++;
             }
 
             @Override
