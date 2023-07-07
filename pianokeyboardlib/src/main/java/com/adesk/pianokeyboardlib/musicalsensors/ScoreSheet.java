@@ -50,7 +50,7 @@ public class ScoreSheet extends View {
 
 
     public void drawStave(Canvas canvas, int x, int y){
-        int spacing = 50;
+        int spacing = 7*3;
         y+=spacing;
         int width = canvas.getWidth();
         canvas.drawLine(x,y,width,y,paint);
@@ -70,7 +70,7 @@ public class ScoreSheet extends View {
         Positioner pos = getNotePosition(note,x,y);
         y = pos.getPos();
         if(!pos.isDown()){
-            y+=137;
+            y+=60;
         }
         switch (pos.accidentals) {
             case 1:
@@ -81,17 +81,17 @@ public class ScoreSheet extends View {
                 break;
         }
 
-        canvas.drawBitmap(symbol, null, new Rect(x,y-2,x+77,y+46), null);
+        canvas.drawBitmap(symbol, null, new Rect(x,y-2,x+153/5,y+94/5), null);
     }
 
     private void drawSharp(int x, int y, boolean down) {
         y-=10;
-        x-=40;
+        x-=20;
         if(!down){
             y+=130;
         }
         canvas.drawBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.sharp),
-                                null, new Rect(x,y,x+23,y+80), null);
+                                null, new Rect(x,y,x+82/5,y+280/7), null);
     }
 
     private void drawFlat(int x, int y, boolean down) {
@@ -101,7 +101,7 @@ public class ScoreSheet extends View {
             y+=130;
         }
         canvas.drawBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.flat),
-                null, new Rect(x,y,x+21,y+70), null);
+                null, new Rect(x,y,x+75/5,y+248/5), null);
     }
 
 
@@ -110,24 +110,23 @@ public class ScoreSheet extends View {
         super.onDraw(canvas);
         this.canvas = canvas;
         paint.setColor(Color.BLACK);
-        paint.setStrokeWidth(5);
+        paint.setStrokeWidth(3);
         int MAX_WIDTH = canvas.getWidth();
-        int x = 40;
+        int x = 0;
         int y = 0;
         canvas.drawBitmap(BitmapFactory.decodeResource(getResources(),R.drawable.treble_clef),
-                                null, new Rect(x,y,x+150,y+375),null);
-
-        canvas.drawLine(x+165,y+90,x+165,y+290,paint);
-        y += 40;
+                                null, new Rect(x,y,x+66,y+59*3),null);
+        canvas.drawLine(x+100,y+13*3+7*3,x+100,y+13*11,paint);
+        y += 13*3;
         drawStave(canvas, x,y);
-        drawStave(canvas, x+90,y);
-        drawStave(canvas, x+120,y);
+//        drawStave(canvas, x+90,y);
+//        drawStave(canvas, x+120,y);
         x+=220;
         for(Note note : track){
             drawSemibreve(note, x, y);
             if(x > MAX_WIDTH-150){
                 y += 350;
-                x = 40;
+                x = 20;
             } else x+=120;
 
         }
@@ -135,7 +134,7 @@ public class ScoreSheet extends View {
 
     public Positioner getNotePosition(Note note, int x, int y){
         y+=2;
-        int downDist = 25;
+        int downDist = 7*3/2;
         boolean drawDown = false;
         String theNote;
         int accidentals = 0;
@@ -167,30 +166,30 @@ public class ScoreSheet extends View {
             y += (downDist * 5);
             drawDown = true;
         } else if(theNote.equals("A") && note.getOctave() == 4){
-            y += 13;
+            y += 5;
             drawDown = false;
         } else if(theNote.equals("G") && note.getOctave() == 4){
-            y += 13 + downDist;
+            y += 5 + downDist;
             drawDown = false;
         } else if(theNote.equals("F") && note.getOctave() == 4){
-            y += 13 + (downDist * 2);
+            y += 5 + (downDist * 2);
             drawDown = false;
         } else if(theNote.equals("E") && note.getOctave() == 4){
-            y += 13 + (downDist * 3);
+            y += 5 + (downDist * 3);
             drawDown = false;
         } else if(theNote.equals("D") && note.getOctave() == 4){
-            y += 13 + (downDist * 4);
+            y += 5 + (downDist * 4);
             drawDown = false;
         } else if(note.getOctave() <= 4){
             y += 20 + (downDist * 5);
-            paint.setStrokeWidth(9);
-            canvas.drawLine(x-10,y+133,x+70,y+133,paint);
-            paint.setStrokeWidth(5);
+            paint.setStrokeWidth(3);
+            canvas.drawLine(x-10,y+68,x+45,y+68,paint);
+            paint.setStrokeWidth(3);
             drawDown = false;
         } else {
-            paint.setStrokeWidth(9);
-            canvas.drawLine(x-10,y+10,x+70,y+10,paint);
-            paint.setStrokeWidth(5);
+            paint.setStrokeWidth(3);
+            canvas.drawLine(x-10,y+10,x+45,y+10,paint);
+            paint.setStrokeWidth(3);
             y-=40;
             drawDown = true;
         }
